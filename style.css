@@ -1,0 +1,111 @@
+body {
+      background: #333;
+    }
+
+    .container {
+      background: #333;
+      margin: 0 auto;
+      width: 90%;
+      height: 100%;
+      display: flex;
+    }
+
+    .controls {
+      width: 50%;
+    }
+
+    h1, h3 {
+      text-align: center;
+    }
+
+    h1, h3, h5 {
+      color: white;
+      font-family: arial;
+    }
+  
+    ul {
+      font-family: arial;
+      color: #FFF;
+    }
+
+    .drummachine {
+      width: 50%;
+      display: flex;
+      flex-flow: wrap row;
+    }
+
+    button { 
+      width: 8rem;
+      height: 8rem;
+      padding: 0rem;
+      margin: 0;
+      background: #666;
+      border: 2px solid black;
+      color: #ddd;
+      font-size: 2rem;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .drum {
+      width: 33%;
+      height: 33%;
+    }
+
+    .active {
+      background: red;
+    }
+
+    .volumecontrol {
+        writing-mode: bt-lr;
+        -webkit-appearance: slider-vertical;
+        width: 8px;
+        height: 200px;
+        padding: 0 5px;
+        color: red;
+    }   
+
+    .volumecontrol:focus {
+      outline: none;
+    }
+
+    .volumelabel {
+      text-align: center;
+    }
+
+    .controls {
+      margin: 0.25rem;
+    }
+
+    .drummachine {
+      margin: 0.25rem;
+    }
+
+    .record {
+      height: 3rem;
+      background: red;
+    }
+
+    .play {
+      height: 3rem;
+      background: green;
+    }
+
+    .slidercontainer {
+      width: 100%;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .volumecontrol {
+/*      margin: 1rem 2.5rem;*/
+    }
+
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: default;
+    }

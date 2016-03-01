@@ -1,0 +1,63 @@
+<html>
+<head>
+  <title>Drum Machine Prototype</title>
+  <script src="jquery.js"></script>
+  <link rel="stylesheet" href="style.css"> 
+  <script>
+    function updateVolume(value, id) {
+      document.querySelector('.' + id + 'label').innerHTML = value;
+    }
+  </script>
+</head>
+<body>
+<div class="container">
+  <div class="controls">
+      <canvas class="visualizer" width="640" height="250"></canvas> 
+      <div class="slidercontainer">
+        <input type="range" class="volumecontrol" id="kickvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="snarevol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="hatvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="woodenvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="metalvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="snare1vol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="ridevol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="bass_stabvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+        <input type="range" class="volumecontrol" id="lead_stabvol" name="volume" step="1" min="0" max="100" oninput="updateVolume(value, id)">
+      </div>
+      <div class="slidercontainer">
+        <label for="volumeinput" class="kickvollabel">50</label>
+        <label for="volumeinput" class="snarevollabel">50</label>
+        <label for="volumeinput" class="hatvollabel">50</label>
+        <label for="volumeinput" class="woodenvollabel">50</label>
+        <label for="volumeinput" class="metalvollabel">50</label>
+        <label for="volumeinput" class="snare1vollabel">50</label>
+        <label for="volumeinput" class="ridevollabel">50</label>
+        <label for="volumeinput" class="bass_stabvollabel">50</label>
+        <label for="volumeinput" class="lead_stabvollabel">50</label>
+      </div>
+      
+      <button class="record">Record</button>
+      <button class="play">Play</button>
+      <label for="drumkit">Choose a drum kit</label>
+      <select name="drumkit" id="drumkit">
+          <option value="hiphop">HipHop</option>
+          <option value="house">House</option>
+          <option value="garage">Garage</option>
+          <option value="dnb">Drum & Bass</option>
+      </select>
+  </div>
+  <div class="drummachine">
+    <button class="kick drum" disabled>Kick</button>
+    <button class="snare drum">High Snare</button>
+    <button class="hat drum">Hat</button>
+    <button class="wooden drum">Cowbell</button>
+    <button class="metal drum">Shaker</button>
+    <button class="snare1 drum">Low Snare</button>
+    <button class="ride drum">Ride</button>
+    <button class="bass drum">Bass Stab</button>
+    <button class="lead drum">Lead Stab</button>
+  </div>
+</div>
+<script src="main2.js"></script>
+</body>
+</html>

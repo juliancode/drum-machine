@@ -1,0 +1,224 @@
+<html>
+<head>
+	<title>web audio api</title>
+ <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <script src="jquery.js"></script>
+  <style>
+    body {
+      background: #222;
+    }
+    button { 
+      width: 8rem;
+      height: 8rem;
+      background: #666;
+      border: 2px solid black;
+      color: #ddd;
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+
+<button class="play">kick</button>
+<button class="stop">snare</button>
+<button class="hat">hat</button>
+
+<!-- <input class="playback-rate-control" type="range" min="0.25" max="3" step="0.05" value="1"></span>
+<span class="playback-rate-value">1</span>
+</br>
+<span class="loopstart-control">loop start control</span>
+<span class="loopstart-value"></span>
+</br>
+<span class="loopend-control">loop end control</span>
+<span class="loopend-value"></span> -->
+
+
+
+<pre></pre>
+
+<script>
+// define variables
+
+$(document).keypress(function(e){
+    if (e.which == 55){
+        getData();
+        source.start(0);
+    }
+
+    if (e.which == 56){
+        getSnare();
+        source.start(0);
+    }
+
+    if (e.which == 57){
+        getHat();
+        hatsource.start(0);
+    }
+
+
+});
+
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var source;
+var hatsource;
+// var songLength;
+
+var pre = document.querySelector('pre');
+var myScript = document.querySelector('script');
+var play = document.querySelector('.play');
+var stop = document.querySelector('.stop');
+var hat = document.querySelector('.hat');
+
+// var playbackControl = document.querySelector('.playback-rate-control');
+// var playbackValue = document.querySelector('.playback-rate-value');
+// playbackControl.setAttribute('disabled', 'disabled');
+
+// var loopstartControl = document.querySelector('.loopstart-control');
+// var loopstartValue = document.querySelector('.loopstart-value');
+// loopstartControl.setAttribute('disabled', 'disabled');
+
+// var loopendControl = document.querySelector('.loopend-control');
+// var loopendValue = document.querySelector('.loopend-value');
+// loopendControl.setAttribute('disabled', 'disabled');
+
+// use XHR to load an audio track, and
+// decodeAudioData to decode it and stick it in a buffer.
+// Then we put the buffer into the source
+
+function getData() {
+  source = audioCtx.createBufferSource();
+  request = new XMLHttpRequest();
+  request.open('GET', 'kick.wav', true);
+  request.responseType = 'arraybuffer';
+
+  request.onload = function() {
+    var audioData = request.response;
+
+    audioCtx.decodeAudioData(audioData, function(buffer) {
+        myBuffer = buffer;
+        // songLength = buffer.duration;
+        source.buffer = myBuffer;
+        // source.playbackRate.value = playbackControl.value;
+        source.connect(audioCtx.destination);
+        source.loop = false;
+
+        // loopstartControl.setAttribute('max', Math.floor(songLength));
+        // loopendControl.setAttribute('max', Math.floor(songLength));
+      },
+
+      function(e){"Error with decoding audio data" + e.err});
+  }
+  request.send();
+}
+
+function getSnare() {
+  source = audioCtx.createBufferSource();
+  request = new XMLHttpRequest();
+  request.open('GET', 'snare.wav', true);
+  request.responseType = 'arraybuffer';
+
+
+  request.onload = function() {
+    var audioData = request.response;
+
+    audioCtx.decodeAudioData(audioData, function(buffer) {
+        myBuffer = buffer;
+        // songLength = buffer.duration;
+        source.buffer = myBuffer;
+        // source.playbackRate.value = playbackControl.value;
+        source.connect(audioCtx.destination);
+        source.loop = false;
+        var meter = createAudioMeter(audioCtx,0.95,0.95,500);
+
+        // loopstartControl.setAttribute('max', Math.floor(songLength));
+        // loopendControl.setAttribute('max', Math.floor(songLength));
+      },
+
+      function(e){"Error with decoding audio data" + e.err});
+  }
+  request.send();
+}
+
+function getHat() {
+  hatsource = audioCtx.createBufferSource();
+  request = new XMLHttpRequest();
+  request.open('GET', 'hat.wav', true);
+  request.responseType = 'arraybuffer';
+  console.log(audioCtx.currentTime,
+              audioCtx.destination,
+              audioCtx.listener,
+              audioCtx.sampleRate,
+              audioCtx.state
+
+                        
+  );
+
+
+  request.onload = function() {
+    var audioData = request.response;
+
+    audioCtx.decodeAudioData(audioData, function(buffer) {
+        myBuffer = buffer;
+        // songLength = buffer.duration;
+        hatsource.buffer = myBuffer;
+        // source.playbackRate.value = playbackControl.value;
+        hatsource.connect(audioCtx.destination);
+        hatsource.loop = false;
+
+        // loopstartControl.setAttribute('max', Math.floor(songLength));
+        // loopendControl.setAttribute('max', Math.floor(songLength));
+      },
+
+      function(e){"Error with decoding audio data" + e.err});
+  }
+  request.send();
+}
+
+// wire up buttons to stop and play audio, and range slider control
+
+play.onclick = function() {
+  getData();
+  source.start(0);
+  // play.setAttribute('disabled', 'disabled');
+  // playbackControl.removeAttribute('disabled');
+  // loopstartControl.removeAttribute('disabled');
+  // loopendControl.removeAttribute('disabled');
+}
+
+stop.onclick = function() {
+  getSnare();
+  source.start(0);
+  // play.removeAttribute('disabled');
+  // playbackControl.setAttribute('disabled', 'disabled');
+  // loopstartControl.setAttribute('disabled', 'disabled');
+  // loopendControl.setAttribute('disabled', 'disabled');
+}
+
+hat.onclick = function() {
+  getHat();
+  hatsource.start(0);
+
+}
+
+
+// playbackControl.oninput = function() {
+//   source.playbackRate.value = playbackControl.value;
+//   playbackValue.innerHTML = playbackControl.value;
+// }
+
+// loopstartControl.oninput = function() {
+//   source.loopStart = loopstartControl.value;
+//   loopstartValue.innerHTML = loopstartControl.value;
+// }
+
+// loopendControl.oninput = function() {
+//   source.loopEnd = loopendControl.value;
+//   loopendValue.innerHTML = loopendControl.value;
+// }
+
+
+  
+</script>
+</body>
+</html>
