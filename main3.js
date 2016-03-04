@@ -9,8 +9,9 @@
   var rideButton = $('.ride');
   var bassButton = $('.bass');
   var leadButton = $('.lead');
-
   var stepPressed = false;
+
+  var SAMPLE_DIR = "./sounds/" 
 
   var Loop = {
     config: {
@@ -54,7 +55,7 @@
 
 Sample = function(filename) {
     var request = new XMLHttpRequest();
-    request.open('GET', filename, true);
+    request.open('GET', SAMPLE_DIR + filename, true);
     request.responseType = 'arraybuffer';
     var sampleBuffer;
     var isPlaying = false;
@@ -118,7 +119,7 @@ Sample = function(filename) {
 
 } // End of Sample object
   
-  var kick = new Sample("kick.wav")
+  var kick = new Sample("kick.wav", kick)
   var snare = new Sample("snare.wav")
   var hat = new Sample("hat.wav")
   var cowbell = new Sample("wooden.wav")
