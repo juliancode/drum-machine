@@ -97,11 +97,6 @@ body {
       justify-content: space-around;
     }
 
-    .volumecontrol {
-/*      margin: 1rem 2.5rem;*/
-    }
-
-
     button {
       cursor: pointer;
     }
@@ -109,3 +104,38 @@ body {
     button:disabled {
       cursor: default;
     }
+
+    .sequencer {
+      margin: 0 auto;
+      width: 90%;
+    }
+
+    .sequencer-row {
+      display: flex;
+      margin-bottom: 0.25rem;
+    }
+
+    .sequencer-row label {
+      margin: 0 1rem;
+      margin-top: 1.5rem;
+      color: white;
+      height: 5rem;
+    }
+
+    .sequencer-buttons {
+      margin: 0 0.25rem;
+      height: 5rem;
+    }
+
+    .sequencer-buttons:nth-child(n+5) {
+      background-color: #999;
+    }
+
+    .sequencer-buttons:nth-child(n+9) {
+      background-color: #666;
+    }
+
+    
+
+    .sequencer-buttons:nth-child(n+13) {
+      background-color: #999;

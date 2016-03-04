@@ -47,16 +47,11 @@
       );
     }
     request.send();
-
-    // https://www.reddit.com/r/reactjs/comments/46xse5/is_there_a_form_library_with_all_sorts_of_form/
-    //  REACT SLIDERS
  
     this.play = function() {
-
-        var volume = document.querySelector("#volumeinput").value / 100;
-        console.log(gainNode.gain.value);
         if (isPlaying === false) {
-        var sample = audioCtx.createBufferSource()
+        var sample = audioCtx.createBufferSource();
+        var volume = document.querySelector("#volumeinput").value / 100;
         sample.buffer = sampleBuffer;
         gainNode.gain.value = volume;
         sample.connect(gainNode);
@@ -65,7 +60,6 @@
         sample.loop = this.loop;
         sample.start(0);
         visualize();
-        // https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
       }
       isPlaying = true
     }
@@ -156,6 +150,21 @@
 
   $('#volumeinput').click(function() {
      this.blur();
+     console.log("hi");
+});
+
+loopConfig {
+  kick: [0,1,2,3];
+  snare: [];
+}
+
+function playLoop(loopConfig) {
+  console.log(loopConfig.kick);
+}
+
+$(body).click(function() {
+  console.log("hello");
+  playLoop();
 });
 
 function visualize() {

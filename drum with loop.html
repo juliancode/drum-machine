@@ -95,9 +95,8 @@
     var isPlaying = false;
 
     this.drumName = filename.split(".")[0]
-    this.loop = false
 
-    this.tempo = 172;
+    this.tempo = 172
     var oneBeatTime = (60 / this.tempo)
     var oneBarTime = oneBeatTime * 4
     var numberOfBars = 8
@@ -125,14 +124,6 @@
         sample.start(0);
       }
       isPlaying = true
-    }
-
-    this.playOnce = function() {
-      var sample = audioCtx.createBufferSource()
-      sample.buffer = sampleBuffer;
-      sample.connect(audioCtx.destination);
-      sample.loop = this.loop;
-      sample.start(0);
     }
 
     this.playInNumberOfSeconds = function(numberOfSeconds) {
@@ -180,17 +171,16 @@
   var lead = new Sample("lead_stab.wav")
 
 
-  // $("body").click(function() {
-  //   kick.playLoop(0)
-  //   snare.playLoop(1)
-  //   kick.playLoop(2.5)
-  //   snare.playLoop(3)
-  //   kick.playLoop(4)
-  //   snare.playLoop(5)
-  //   kick.playLoop(6.5)
-  //   snare.playLoop(7)
-
-  // })
+  $("body").click(function() {
+    kick.playLoop(0)
+    snare.playLoop(1)
+    kick.playLoop(2.5)
+    snare.playLoop(3)
+    kick.playLoop(4)
+    snare.playLoop(5)
+    kick.playLoop(6.5)
+    snare.playLoop(7)
+  })
 
   // kickButton.click(kick.playOnce) 
   // snareButton.click(snare.playOnce)

@@ -1,11 +1,30 @@
 (function() {
 
+  var kickButton = $('.kick');
+  var snareButton = $('.snare');
+  var hatButton = $('.hat');
+  var woodenButton = $('.wooden');
+  var metalButton = $('.metal');
+  var snare1Button = $('.snare1');
+  var rideButton = $('.ride');
+  var bassButton = $('.bass');
+  var leadButton = $('.lead');
+
+  var stepPressed = false;
+
   var Loop = {
     config: {
       kick: [],
-      snare: []
+      snare: [],
+      hat: [],
+      cowbell: [],
+      shaker: [],
+      lowsnare: [],
+      ride: [],
+      bass: [],
+      lead: []
     },
-    tempo: 120
+    tempo: 172
   }
   
   var oneBeatTime = (60 / Loop.tempo)
@@ -42,6 +61,12 @@ Sample = function(filename) {
 
     this.drumName = filename.split(".")[0]
 
+    this.tempo = Loop.tempo
+    var oneBeatTime = (60 / this.tempo)
+    var oneBarTime = oneBeatTime * 4
+    var numberOfBars = 8
+    var totalLoop = oneBarTime * numberOfBars
+
     request.onload = function() {
       var audioData = request.response; 
 
@@ -74,19 +99,31 @@ Sample = function(filename) {
       isPlaying = false
     }
 
-    this.playLoop = function(Loop) {
-
+     this.playInNumberOfSeconds = function(numberOfSeconds) {
+      var sample = audioCtx.createBufferSource()
+      sample.buffer = sampleBuffer;
+      sample.connect(audioCtx.destination);
+      if (!sample.start)
+        sample.start = sample.noteOn;
+      sample.start(numberOfSeconds);
     }
 
+    this.playLoop = function(step) {
+     var startTime = audioCtx.currentTime;
+     var time = startTime + (step * oneBeatTime);
 
-  } // End of Sample object
+     this.playInNumberOfSeconds(time);
+
+   }
+
+} // End of Sample object
   
   var kick = new Sample("kick.wav")
   var snare = new Sample("snare.wav")
   var hat = new Sample("hat.wav")
-  var wooden = new Sample("wooden.wav")
-  var metal = new Sample("metal.wav")
-  var snare1 = new Sample("snare1.wav")
+  var cowbell = new Sample("wooden.wav")
+  var shaker = new Sample("metal.wav")
+  var lowsnare = new Sample("snare1.wav")
   var ride = new Sample("ride.wav")
   var bass = new Sample("bass_stab.wav")
   var lead = new Sample("lead_stab.wav")
@@ -125,19 +162,19 @@ Sample = function(filename) {
 
     if (e.which == 37){
       e.preventDefault();
-      toggleSample(isKeydown, wooden)
+      toggleSample(isKeydown, cowbell)
       woodenButton.toggleClass('active');
     }
 
     if (e.which == 12){
       e.preventDefault();
-      toggleSample(isKeydown, metal)
+      toggleSample(isKeydown, shaker)
       metalButton.toggleClass('active');
     }
 
     if (e.which == 39){
       e.preventDefault();
-      toggleSample(isKeydown, snare1)
+      toggleSample(isKeydown, lowsnare)
       snare1Button.toggleClass('active');
     }
 
@@ -206,19 +243,52 @@ function visualize() {
 }
 
 
-// Sequencer & looping code
-
-
-
-$('.record').click(function() {
-  Loop.config.kick.push(1, 2, 4, 3);
-});
+// Sequencer code
 
 $('.sequencer-buttons').click(function() {
   var drum = ($(this).attr('drum'));
   var step = ($(this).attr('step'));
+  if (this.pressed) {
+  Loop["config"][drum].splice($.inArray(step,Loop["config"][drum]),1); 
+  $(this).css("background", "");
+  this.pressed = false;
+  }
+  else {
   Loop["config"][drum].push(step);
+  $(this).css("background", "red");
+  this.pressed = true;
+  }
+});
+
+$('.play').click(function() {
   console.log(Loop);
+    Loop.config.kick.map(function(steps){
+     kick.playLoop(steps-1);
+     });
+    Loop.config.snare.map(function(steps){
+     snare.playLoop(steps-1);
+     });
+    Loop.config.hat.map(function(steps){
+     hat.playLoop(steps-1);
+     });
+    Loop.config.cowbell.map(function(steps){
+     cowbell.playLoop(steps-1);
+     });
+    Loop.config.shaker.map(function(steps){
+     shaker.playLoop(steps-1);
+     });
+    Loop.config.lowsnare.map(function(steps){
+     lowsnare.playLoop(steps-1);
+     });
+    Loop.config.ride.map(function(steps){
+     ride.playLoop(steps-1);
+     });
+    Loop.config.bass.map(function(steps){
+     bass.playLoop(steps-1);
+     });
+    Loop.config.lead.map(function(steps){
+     lead.playLoop(steps-1);
+     });
 });
 
 })();
