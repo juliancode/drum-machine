@@ -33,11 +33,14 @@
   var numberOfBars = 8
   var totalLoop = oneBarTime * numberOfBars
 
-  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  var analyser = audioCtx.createAnalyser();
-  analyser.minDecibels = -100;
-  analyser.maxDecibels = -20;
-  analyser.fftSize = 256;
+  // var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // var gainNode = audioCtx.createGain();
+  // var analyser = audioCtx.createAnalyser();
+  // analyser.minDecibels = -100;
+  // analyser.maxDecibels = -20;
+  // analyser.fftSize = 256;
+  // var bufferLength = analyser.frequencyBinCount;
+  // var dataArray = new Uint8Array(bufferLength);
 
   var canvas = document.querySelector('.visualizer');
   var canvasCtx = canvas.getContext("2d");
@@ -57,8 +60,6 @@ Sample = function(filename) {
     var sampleBuffer;
     var isPlaying = false;
 
-    var sampleGain = audioCtx.createGain()
-
     this.drumName = filename.split(".")[0]
 
     this.tempo = Loop.tempo
@@ -66,10 +67,7 @@ Sample = function(filename) {
     var oneBarTime = oneBeatTime * 4
     var numberOfBars = 8
     var totalLoop = oneBarTime * numberOfBars
-    
-    document.querySelector('#' + this.drumName + 'vol')
-    var volume = document.querySelector('#' + this.drumName + 'vol').value / 100; // Gets volume for drum playing and sets to volume
-    
+
     request.onload = function() {
       var audioData = request.response; 
 
@@ -84,14 +82,25 @@ Sample = function(filename) {
     request.send();
 
     this.play = function() {
+      console.log(this);
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var gainNode = audioCtx.createGain();
+        var analyser = audioCtx.createAnalyser();
+        analyser.minDecibels = -100;
+        analyser.maxDecibels = -20;
+        analyser.fftSize = 256;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+
         var volume = document.querySelector('#' + this.drumName + 'vol').value / 100; // Gets volume for drum playing and sets to volume
         if (isPlaying === false) {
         var sample = audioCtx.createBufferSource()
         sample.buffer = sampleBuffer;
-        sample.connect(sampleGain);
-        sampleGain.gain.value = volume;
-        sampleGain.connect(analyser);
+        gainNode.gain.value = volume;
+        sample.connect(gainNode);
+        gainNode.connect(analyser);
         analyser.connect(audioCtx.destination);
+        // sample.loop = this.loop;
         sample.start(0);
       }
       isPlaying = true
@@ -102,14 +111,9 @@ Sample = function(filename) {
     }
 
      this.playInNumberOfSeconds = function(numberOfSeconds) {
-      var volume = document.querySelector('#' + this.drumName + 'vol').value / 100; // Gets volume for drum playing and sets to volume
       var sample = audioCtx.createBufferSource()
-      var sampleGain = audioCtx.createGain()
       sample.buffer = sampleBuffer;
-      sample.connect(sampleGain);
-      sampleGain.gain.value = volume;
-      sampleGain.connect(analyser);
-      analyser.connect(audioCtx.destination)
+      sample.connect(audioCtx.destination);
       if (!sample.start)
         sample.start = sample.noteOn;
       sample.start(numberOfSeconds);
@@ -120,6 +124,7 @@ Sample = function(filename) {
      var time = startTime + (step * oneBeatTime);
 
      this.playInNumberOfSeconds(time);
+
    }
 
 } // End of Sample object
@@ -144,8 +149,6 @@ Sample = function(filename) {
       sample.stop()
     }
   }
-
-
 
   function handleToggleSamples(e) {
     var isKeydown = e.type === "keydown"
