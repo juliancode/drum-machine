@@ -244,7 +244,6 @@ $("button").click(function() {
 
 $(window).resize(function(){
     intendedWidth = document.querySelector('.controls').clientWidth;
-    console.log(intendedWidth);
     canvas.setAttribute('width',intendedWidth);
 });
 
