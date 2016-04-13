@@ -1,0 +1,332 @@
+/* Media Queries for screens less than 600px tall */
+
+@media only screen and (max-height: 600px)  {
+  .sequencer-container {
+    height: auto !important;
+  }
+
+  .controls {
+    width: 100% !important;
+  }
+
+  .drum-machine {
+    order: -1;
+    width: 100% !important;
+  }
+}
+
+/* */
+
+@media only screen and (max-width: 1400px) {
+  .container {
+    width: 100% !important;
+  }
+  .drum {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Media Queries for screens less than 960px wide */
+
+@media only screen and (max-width: 960px)  {
+  .container {
+    flex-flow: column;
+    height: auto !important;
+  }
+
+  .controls {
+    width: 100% !important;
+  }
+
+  .drum-machine {
+    order: -1;
+    width: 100% !important;
+  }
+
+  .drum {
+    font-size: 2rem;
+  }
+
+  .sequencer-buttons {
+    width: 6%;
+    box-shadow: 1px 1px 2px #000;
+    margin: 0 0.25rem;
+    height: 50%;
+  }
+}
+
+/* Containers & Layout styling */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  background: #757575;
+  border-radius: 1rem;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  box-shadow: 4px 4px 2px 2px #000;
+}
+
+.controls {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-content: flex-end;
+  margin: 0.25rem;
+}
+
+.drum-machine {
+  width: 50%;
+  display: flex;
+  flex-flow: wrap row;
+  align-content: space-between;
+}
+
+.sequencer-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.sequencer { 
+  height: 80%;
+  width: 100%;
+}
+
+.controls-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0rem;
+}
+
+.volume-control-container {
+  border:1px solid #000;
+  margin: 0.5rem;
+  padding: 0.5rem 0rem;
+  height: 75%;
+  width: 11%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.volume-container {
+  display: flex;
+  flex-flow: column;
+  align-items: space-between;
+  height: 40%;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 2px #000;
+  background: #424242;
+}
+
+.bpm-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  flex-flow: wrap row;
+  align-items: flex-end;
+  height: 10%;
+}
+
+.drum-label {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.volume-label {
+  font-weight: bold;
+  font-family: arial;
+  text-align: center;
+}
+
+
+h1, h3 {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+h1, h3, h5 {
+  color: white;
+  font-family: arial;
+}
+
+button { 
+  width: 8rem;
+  height: 8rem;
+  padding: 0rem;
+  margin: 0;
+  background: #424242;
+  border: 1px solid #000;
+  color: #FFF;
+  font-size: 2rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.drum {
+  width: 30%;
+  height: 30%;
+  margin: 0.75% 1.5%;
+}
+
+.active {
+  background: #f44336;
+}
+
+h5 {
+  text-align: center;
+  width: 5rem;
+}
+
+.startbtn, .sequencerbtn, .livebtn, .stopbtn, .playbtn, .bpmbtn {
+  width: auto;
+  height: 2rem;
+  margin: 0 0.5rem;
+  padding: 0 1.5rem;
+  font-size: 1.5rem;
+}
+
+.sequencerbtn, .livebtn {
+  background: #1565C0;
+}
+
+.startbtn {
+  width: 33%;
+  margin: 0 auto;
+  background: #FF9800;
+}
+
+.playbtn {
+  background: #1B5E20;
+}
+
+.stopbtn, .bpmbtn {
+  background: #f44336;
+}
+
+button {
+cursor: pointer;
+border: 1px solid #000;
+box-shadow: 2px 2px 2px #000;
+}
+
+button:disabled {
+cursor: default; 
+background: #333;
+}
+
+/* Sequencer styling */
+
+.sequencer-row {
+  height: 11%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.sequencer-row label {
+  margin: 0 1rem;
+  margin-top: 1.5rem;
+  color: white;
+  height: 100%;
+}
+
+.sequencer-buttons {
+  width: 6%;
+  box-shadow: 1px 1px 2px #000;
+  margin: 0 0.25rem;
+  height: 100%;
+}
+
+.sequencer-buttons:nth-child(n+2) {
+  background-color: #424242;
+}
+
+.sequencer-buttons:nth-child(n+6) {
+  background-color: #999;
+}
+
+.sequencer-buttons:nth-child(n+10) {
+  background-color: #424242;
+}
+
+.sequencer-buttons:nth-child(n+14) {
+  background-color: #999;
+}
+
+/* General UI Classes */
+
+.hidden {
+  display: none;
+}
+
+/* Volume Sliders */
+
+input[type=range] {
+  -webkit-appearance: slider-vertical;
+  height: 100%;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+#welcome {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 50%;
+  background: #fff;
+  color: #000;
+  font-size: 1.5rem;
+  font-family: arial;
+  padding: 3rem;
+  border-radius: 0.5rem;
+}
+
+#welcome h1 {
+  color: #000;
+}
+
+/* BPM UI */
+
+input.bpm {
+  width: 10%;
+  height: 2rem;
+  font-size: 1.5rem;
+}
