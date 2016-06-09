@@ -187,7 +187,7 @@ var pressSamples = function() { // Press samples function triggered when button 
 
   switch(drum) {
     case "kick":
-      kickplayNow();
+      kick.playNow();
       kick.stop();
       break;
     case "high-snare":
@@ -355,8 +355,8 @@ $('.modal .close').on('click', function(e){
 });
 
 $('.livebtn').click(function() {
-  $('.controls').css('display', 'block');
-  $('.drum-machine').css('display', 'block');
+  $('.controls').css('display', 'flex');
+  $('.drum-machine').css('display', 'flex');
   $('.sequencer-container').css('display', 'none');
 });
 

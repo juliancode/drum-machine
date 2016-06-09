@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>DrumMachine.io - Drum Machine in the Browser</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="js/jquery.the-modal.js"></script>
   <link rel="stylesheet" href="css/style.css"> 
@@ -22,7 +23,7 @@
 </div>
 <div class="container"> 
   <div class="controls">
-      <canvas class="visualizer" width="640" height="360"></canvas> 
+      <canvas class="visualizer" width="640" height="325"></canvas> 
       <div class="volume-container">
         <h3>Volume</h3>
         <div class="controls-container">
@@ -78,15 +79,60 @@
     </div>
   </div>
   <div class="drum-machine">
-    <button class="drum" drum="kick">Kick</button>
-    <button class="drum" drum="high-snare">High Snare</button>
-    <button class="drum" drum="hat">Hat</button>
-    <button class="drum" drum="cowbell">Cowbell</button>
-    <button class="drum" drum="shaker">Shaker</button>
-    <button class="drum" drum="low-snare">Low Snare</button>
-    <button class="drum" drum="ride">Ride</button>
-    <button class="drum" drum="bass">Bass</button>
-    <button class="drum" drum="lead">Lead</button>
+    <button class="drum" drum="kick">Kick
+      <div class="keys">
+        <span>Q</span>
+        <span>7</span>
+      </div>
+    </button>
+    <button class="drum" drum="high-snare">High Snare
+      <div class="keys">
+        <span>W</span>
+        <span>8</span>
+      </div>
+    </button>
+    <button class="drum" drum="hat">Hat
+      <div class="keys">
+        <span>E</span>
+        <span>9</span>
+      </div>
+    </button>
+    <button class="drum" drum="cowbell">Cowbell
+      <div class="keys">
+        <span>A</span>
+        <span>4</span>
+      </div>
+    </button>
+    <button class="drum" drum="shaker">Shaker
+      <div class="keys">
+        <span>S</span>
+        <span>5</span>
+      </div>
+    </button>
+    <button class="drum" drum="low-snare">Low Snare
+      <div class="keys">
+        <span>D</span>
+        <span>6</span>
+      </div>
+    </button>
+    <button class="drum" drum="ride">Ride
+      <div class="keys">
+        <span>Z</span>
+        <span>1</span>
+      </div>
+    </button>
+    <button class="drum" drum="bass">Bass
+      <div class="keys">
+        <span>X</span>
+        <span>2</span>
+      </div>
+    </button>
+    <button class="drum" drum="lead">Lead
+      <div class="keys">
+        <span>C</span>
+        <span>3</span>
+      </div>
+    </button>
   </div>
   <div class="sequencer-container" style="display: none;">
     <div class="bpm-container">
@@ -266,7 +312,7 @@
         <button class="sequencer-buttons" drum="lead" step="16"></button>
       </div>
     </div>
-    <div class="buttons-container">
+    <div class="buttons-container" style="margin-top: 15px">
        <button class="livebtn">Live</button>
        <button class="playbtn">Play</button>
       <button class="stopbtn hidden">Stop</button>
